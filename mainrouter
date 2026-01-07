@@ -1,0 +1,87 @@
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname mainrouter
+!
+!
+!
+enable secret 5 $1$mERr$NARFGJytzNQ.L1OAZ.TVE/
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+!
+!
+username admin secret 5 $1$mERr$NARFGJytzNQ.L1OAZ.TVE/
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name school.local
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 192.168.10.1 255.255.255.240
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:10:1::1/64
+ shutdown
+!
+interface GigabitEthernet0/0/1
+ ip address 192.168.10.2 255.255.255.240
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:10:2::1/64
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ password 7 08315442
+ login
+!
+line aux 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+end
